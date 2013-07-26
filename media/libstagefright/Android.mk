@@ -73,6 +73,10 @@ else
 LOCAL_C_INCLUDES += $(TOP)/frameworks/native/include/media/openmax
 endif
 
+# Build with -fno-strict-aliasing here so
+# we may keep it enabled globally
+LOCAL_CFLAGS += -fno-strict-aliasing
+
 ifeq ($(BOARD_USES_STE_FMRADIO),true)
 LOCAL_SRC_FILES += \
         FMRadioSource.cpp                 \
