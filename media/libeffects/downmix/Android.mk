@@ -27,4 +27,8 @@ LOCAL_PRELINK_MODULE := false
 
 LOCAL_CFLAGS += -fvisibility=hidden
 
+# Disable strict aliasing here so it may be
+# enabled globally
+LOCAL_CFLAGS += -fno-strict-aliasing
+
 include $(BUILD_SHARED_LIBRARY)
