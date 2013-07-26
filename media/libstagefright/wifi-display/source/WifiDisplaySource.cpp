@@ -913,6 +913,7 @@ status_t WifiDisplaySource::onReceiveM3Response(
     }
 
     mUsingHDCP = false;
+    char val[PROPERTY_VALUE_MAX];
     if (property_get("persist.sys.wfd.nohdcp", val, NULL)
             && !strcmp("1", val)) {
         ALOGI("Content protection has been disabled for WFD sinks");
