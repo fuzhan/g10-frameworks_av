@@ -129,6 +129,7 @@ LOCAL_SHARED_LIBRARIES := \
         libicuuc \
         liblog \
         libmedia \
+        libminiz \
         libsonivox \
         libssl \
         libstagefright_omx \
@@ -136,8 +137,7 @@ LOCAL_SHARED_LIBRARIES := \
         libsync \
         libui \
         libutils \
-        libvorbisidec \
-        libz \
+        libvorbisidec
 
 LOCAL_STATIC_LIBRARIES := \
         libstagefright_color_conversion \
