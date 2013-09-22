@@ -19,6 +19,7 @@
 
 #include <cutils/properties.h>
 #include <gui/Surface.h>
+#include <sys/param.h>
 
 #include "CameraClient.h"
 #include "CameraHardwareInterface.h"
@@ -1058,7 +1059,9 @@ void CameraClient::copyFrameAndPostCopiedFrame(
     }
     previewBuffer = mPreviewBuffer;
 
-    memcpy(previewBuffer->base(), (uint8_t *)heap->base() + offset, size);
+    memset(previewBuffer->base(), 0, size);
+    memcpy(previewBuffer->base(), (const char *)heap->base() + offset,
+           MIN(size, strlen((const char *)heap ->base() + offset)));
 
     sp<MemoryBase> frame = new MemoryBase(previewBuffer, 0, size);
     if (frame == 0) {
