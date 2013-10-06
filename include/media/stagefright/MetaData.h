@@ -53,6 +53,7 @@ enum {
     kKeySampleRate        = 'srte',  // int32_t (audio sampling rate Hz)
     kKeyFrameRate         = 'frmR',  // int32_t (video frame rate fps)
     kKeyBitRate           = 'brte',  // int32_t (bps)
+    kKeyBitspersample     = '#bps',  // int64_t
     kKeyESDS              = 'esds',  // raw data
     kKeyAACProfile        = 'aacp',  // int32_t
     kKeyAVCC              = 'avcc',  // raw data
@@ -173,6 +174,12 @@ enum {
     kTypeESDS        = 'esds',
     kTypeAVCC        = 'avcc',
     kTypeD263        = 'd263',
+};
+
+enum {
+    kTypeWMVVer_7, // WMV1
+    kTypeWMVVer_8, // WMV2
+    kTypeWMVVer_9, // WMV3
 };
 
 class MetaData : public RefBase {
