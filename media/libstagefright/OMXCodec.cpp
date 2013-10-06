@@ -4126,6 +4126,7 @@ status_t OMXCodec::setWMAFormat(const sp<MetaData> &meta)
     int32_t numChannels = 0;
     int32_t bitRate = 0;
     int32_t sampleRate = 0;
+    int32_t blockAlign = 0;
     int32_t formattag = 0;
     OMX_AUDIO_PARAM_WMATYPE paramWMA;
 
@@ -4137,9 +4138,10 @@ status_t OMXCodec::setWMAFormat(const sp<MetaData> &meta)
     CHECK(meta->findInt32(kKeyChannelCount, &numChannels));
     CHECK(meta->findInt32(kKeySampleRate, &sampleRate));
     CHECK(meta->findInt32(kKeyBitRate, &bitRate));
+    CHECK(meta->findInt32(kKeyBlockAlign, &blockAlign));
 
-    CODEC_LOGV("Channels: %d, SampleRate: %d, BitRate: %d",
-            numChannels, sampleRate, bitRate);
+    CODEC_LOGV("Channels: %d, SampleRate: %d, BitRate: %d, blockAlign: %d",
+            numChannels, sampleRate, bitRate, blockAlign);
 
     CHECK(meta->findInt32(kKeyWMAVersion, &version));
 
@@ -4154,6 +4156,7 @@ status_t OMXCodec::setWMAFormat(const sp<MetaData> &meta)
     paramWMA.nChannels = numChannels;
     paramWMA.nSamplingRate = sampleRate;
     paramWMA.nBitRate = bitRate;
+    paramWMA.nBlockAlign = blockAlign;
 
     if(version == kTypeWMA) {
         paramWMA.eFormat = OMX_AUDIO_WMAFormat7;
