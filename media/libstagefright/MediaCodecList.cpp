@@ -56,6 +56,7 @@ MediaCodecList::MediaCodecList()
         return;
     }
 
+#if 0
     //video
     addMediaCodec(false /* encoder */, "OMX.ffmpeg.h264.decoder",   MEDIA_MIMETYPE_VIDEO_AVC   );
     addMediaCodec(false /* encoder */, "OMX.ffmpeg.h263.decoder",   MEDIA_MIMETYPE_VIDEO_H263  );
@@ -76,6 +77,7 @@ MediaCodecList::MediaCodecList()
     addMediaCodec(false /* encoder */, "OMX.ffmpeg.ape.decoder",    MEDIA_MIMETYPE_AUDIO_APE   );
     addMediaCodec(false /* encoder */, "OMX.ffmpeg.dts.decoder",    MEDIA_MIMETYPE_AUDIO_DTS   );
     addMediaCodec(false /* encoder */, "OMX.ffmpeg.flac.decoder",   MEDIA_MIMETYPE_AUDIO_FLAC  );
+#endif
 
     parseXMLFile(file);
 
