@@ -153,6 +153,9 @@ LOCAL_STATIC_LIBRARIES := \
         libstagefright_id3 \
         libFLAC \
 
+LOCAL_LDFLAGS :=  \
+	$(LOCAL_PATH)/codecs/dtsdec/libstagefright_dtsdec.a
+
 LOCAL_SRC_FILES += \
         chromium_http_stub.cpp
 LOCAL_CPPFLAGS += -DCHROMIUM_AVAILABLE=1
