@@ -194,6 +194,7 @@ static void InitOMXParams(T *params) {
 
 static bool IsSoftwareCodec(const char *componentName) {
     if (!strncmp("OMX.google.", componentName, 11)
+        || !strncmp("OMX.ffmpeg.", componentName, 11)
         || !strncmp("OMX.PV.", componentName, 7)) {
         return true;
     }
@@ -1658,6 +1659,7 @@ OMXCodec::OMXCodec(
       mPaused(false),
       mNativeWindow(
               (!strncmp(componentName, "OMX.google.", 11)
+              || !strncmp(componentName, "OMX.ffmpeg.", 11)
               || !strcmp(componentName, "OMX.Nvidia.mpeg2v.decode"))
                         ? NULL : nativeWindow),
       mNumBFrames(0),
