@@ -395,6 +395,16 @@ private:
     void setAC3Format(int32_t numChannels, int32_t sampleRate);
 
     bool mNumBFrames;
+
+    status_t setWMVFormat(const sp<MetaData> &inputFormat);
+    status_t setRAFormat(const sp<MetaData> &inputFormat);
+    status_t setRVFormat(const sp<MetaData> &inputFormat);
+    status_t setAPEFormat(const sp<MetaData> &inputFormat);
+    status_t setDTSFormat(const sp<MetaData> &inputFormat);
+    status_t setFLACFormat(const sp<MetaData> &inputFormat);
+    status_t setFFmpegVideoFormat(const sp<MetaData> &inputFormat);
+    status_t setFFmpegAudioFormat(const sp<MetaData> &inputFormat);
+
     status_t releaseMediaBuffersOn(OMX_U32 portIndex);
     bool mInSmoothStreamingMode;
 #ifdef QCOM_HARDWARE
