@@ -19,6 +19,7 @@
 #include <utils/Log.h>
 
 #include <media/stagefright/MediaCodecList.h>
+#include <media/stagefright/MediaDefs.h>
 
 #include <media/stagefright/foundation/ADebug.h>
 #include <media/stagefright/MediaErrors.h>
@@ -55,6 +56,9 @@ MediaCodecList::MediaCodecList()
         return;
     }
 
+    // TODO should be moved to "/etc/media_codecs.xml"
+    addMediaCodec(false /* encoder */, "OMX.ffmpeg.aac.decoder", MEDIA_MIMETYPE_AUDIO_AAC);
+
     parseXMLFile(file);
 
     if (mInitCheck == OK) {
@@ -66,7 +70,7 @@ MediaCodecList::MediaCodecList()
                 false /* encoder */, "OMX.google.raw.decoder", "audio/raw");
     }
 
-#if 0
+#if 1
     for (size_t i = 0; i < mCodecInfos.size(); ++i) {
         const CodecInfo &info = mCodecInfos.itemAt(i);
 
