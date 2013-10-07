@@ -70,6 +70,7 @@ OMX_ERRORTYPE SoftOMXPlugin::makeComponentInstance(
         OMX_COMPONENTTYPE **component) {
     ALOGV("makeComponentInstance '%s'", name);
 
+    dlerror(); // clear any existing error
     for (size_t i = 0; i < kNumComponents; ++i) {
         if (strcmp(name, kComponents[i].mName)) {
             continue;
@@ -82,10 +83,12 @@ OMX_ERRORTYPE SoftOMXPlugin::makeComponentInstance(
         void *libHandle = dlopen(libName.c_str(), RTLD_NOW);
 
         if (libHandle == NULL) {
-            ALOGE("unable to dlopen %s", libName.c_str());
+            ALOGE("unable to dlopen %s: %s", libName.c_str(), dlerror());
 
             return OMX_ErrorComponentNotFound;
         }
+
+        ALOGV("load component %s for %s", libName.c_str(), name);
 
         typedef SoftOMXComponent *(*CreateSoftOMXComponentFunc)(
                 const char *, const OMX_CALLBACKTYPE *,
@@ -97,7 +100,8 @@ OMX_ERRORTYPE SoftOMXPlugin::makeComponentInstance(
                     "_Z22createSoftOMXComponentPKcPK16OMX_CALLBACKTYPE"
                     "PvPP17OMX_COMPONENTTYPE");
 
-        if (createSoftOMXComponent == NULL) {
+        if (const char *error = dlerror()) {
+            ALOGE("unable to dlsym %s: %s", libName.c_str(), error);
             dlclose(libHandle);
             libHandle = NULL;
 
