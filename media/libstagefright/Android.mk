@@ -87,7 +87,7 @@ LOCAL_SRC_FILES += \
         PCMExtractor.cpp
 endif
 
-ifneq ($(filter caf bfam,$(TARGET_QCOM_AUDIO_VARIANT)),)
+ifneq ($(filter jb_26 caf bfam,$(TARGET_QCOM_AUDIO_VARIANT)),)
     ifeq ($(BOARD_USES_ALSA_AUDIO),true)
         LOCAL_SRC_FILES += LPAPlayerALSA.cpp
         ifeq ($(call is-chipset-in-board-platform,msm8960),true)
