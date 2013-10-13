@@ -54,6 +54,20 @@ class GraphicBuffer;
 
 #define DEBUG_PENDING_BUFFERS   0
 
+#ifdef __clang__
+// Convenience Macro to make copy constructor and assignment operator private
+// (thereby disallowing copying and assigning).
+#define DISALLOW_COPY_AND_ASSIGN(TypeName) \
+  TypeName(const TypeName&);               \
+  void operator=(const TypeName&)
+
+// A macro to disallow all the implicit constructors, namely the
+// default constructor, copy constructor and operator= functions.
+#define DISALLOW_IMPLICIT_CONSTRUCTORS(TypeName) \
+  TypeName();                                    \
+  DISALLOW_COPY_AND_ASSIGN(TypeName)
+#endif
+
 class SurfaceMediaSource : public MediaSource,
                                 public MediaBufferObserver,
                                 protected BufferQueue::ConsumerListener {
