@@ -32,6 +32,8 @@ LOCAL_SHARED_LIBRARIES:= \
         libui                           \
         libutils                        \
 
+LOCAL_GCC := true
+
 LOCAL_MODULE:= libstagefright_wfd
 
 LOCAL_MODULE_TAGS:= optional
@@ -54,6 +56,8 @@ LOCAL_SHARED_LIBRARIES:= \
         libstagefright_wfd              \
         libutils                        \
         liblog                          \
+
+LOCAL_GCC := true
 
 LOCAL_MODULE:= wfd
 
