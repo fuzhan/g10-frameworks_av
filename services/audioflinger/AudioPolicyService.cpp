@@ -494,7 +494,7 @@ bool AudioPolicyService::isStreamActive(audio_stream_type_t stream, uint32_t inP
 
 bool AudioPolicyService::isStreamActiveRemotely(audio_stream_type_t stream, uint32_t inPastMs) const
 {
-#ifndef ICS_AUDIO_BLOB
+#if !defined(ICS_AUDIO_BLOB) && !defined(MR1_AUDIO_BLOB)
     if (mpAudioPolicy == NULL) {
         return 0;
     }
@@ -995,7 +995,9 @@ void AudioPolicyService::AudioCommandThread::insertCommand_l(AudioCommand *comma
             } else {
                 data2->mKeyValuePairs = param2.toString();
             }
-            time = command2->mTime;
+            if (!data2->mKeyValuePairs.compare(data->mKeyValuePairs)){
+                time = command2->mTime;
+            }
         } break;
 
         case SET_VOLUME: {
