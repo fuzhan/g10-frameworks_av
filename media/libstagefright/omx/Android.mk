@@ -53,6 +53,10 @@ ifdef DOLBY_UDC
   LOCAL_CFLAGS += -DDOLBY_UDC
 endif #DOLBY_UDC
 
+ifeq ($(TARGET_ENABLE_QC_AV_ENHANCEMENTS),true)
+  LOCAL_GCC := true
+endif
+
 LOCAL_MODULE:= libstagefright_omx
 
 include $(BUILD_SHARED_LIBRARY)
