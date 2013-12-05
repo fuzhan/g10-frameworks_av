@@ -71,6 +71,8 @@ LOCAL_STATIC_LIBRARIES := \
     libcpustats \
     libmedia_helper
 
+LOCAL_GCC := true
+
 LOCAL_MODULE:= libaudioflinger
 
 LOCAL_SRC_FILES += FastMixer.cpp FastMixerState.cpp AudioWatchdog.cpp
@@ -112,6 +114,8 @@ LOCAL_SHARED_LIBRARIES := \
     libcutils \
     libutils \
     liblog
+
+LOCAL_GCC := true
 
 LOCAL_MODULE:= test-resample
 
