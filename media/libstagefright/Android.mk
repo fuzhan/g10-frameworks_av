@@ -118,6 +118,8 @@ LOCAL_SHARED_LIBRARIES += \
 
 LOCAL_CFLAGS += -Wno-multichar
 
+LOCAL_GCC := true
+
 LOCAL_MODULE:= libstagefright
 
 LOCAL_MODULE_TAGS := optional

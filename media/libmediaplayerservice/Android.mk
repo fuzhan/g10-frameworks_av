@@ -52,6 +52,8 @@ LOCAL_C_INCLUDES :=                                                 \
     $(TOP)/frameworks/native/include/media/openmax                  \
     $(TOP)/external/tremolo/Tremolo                                 \
 
+LOCAL_GCC := true
+
 LOCAL_MODULE:= libmediaplayerservice
 
 include $(BUILD_SHARED_LIBRARY)
