@@ -21,6 +21,7 @@
 #include <gui/BufferQueue.h>
 
 #include <utils/threads.h>
+#include <utils/Macros.h>
 #include <utils/Vector.h>
 #include <media/stagefright/MediaSource.h>
 #include <media/stagefright/MediaBuffer.h>
