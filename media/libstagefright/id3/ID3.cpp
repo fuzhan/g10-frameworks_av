@@ -602,7 +602,7 @@ void ID3::Iterator::getstring(String8 *id, bool otherdata) const {
             framedata++;
             len--;
         }
-        id->setTo(framedata, len);
+        id->setTo((const char*)framedata, len);
         if (framedatacopy != NULL) {
             delete[] framedatacopy;
         }
