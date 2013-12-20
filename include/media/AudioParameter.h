@@ -61,7 +61,6 @@ public:
     static const char * const keyCanOpenProxy;
     static const char * const keyFmVolume;
 #endif
-    static const char * const keySoundCardStatus;
 
     String8 toString();
 
