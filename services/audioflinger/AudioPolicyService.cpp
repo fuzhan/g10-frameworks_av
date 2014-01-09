@@ -418,12 +418,15 @@ status_t AudioPolicyService::setStreamVolumeIndex(audio_stream_type_t stream,
         return BAD_VALUE;
     }
     Mutex::Autolock _l(mLock);
+#ifndef ICS_AUDIO_BLOB
     if (mpAudioPolicy->set_stream_volume_index_for_device) {
         return mpAudioPolicy->set_stream_volume_index_for_device(mpAudioPolicy,
                                                                 stream,
                                                                 index,
                                                                 device);
-    } else {
+    } else 
+#endif
+    {
         return mpAudioPolicy->set_stream_volume_index(mpAudioPolicy, stream, index);
     }
 }
@@ -439,12 +442,15 @@ status_t AudioPolicyService::getStreamVolumeIndex(audio_stream_type_t stream,
         return BAD_VALUE;
     }
     Mutex::Autolock _l(mLock);
+#ifndef ICS_AUDIO_BLOB
     if (mpAudioPolicy->get_stream_volume_index_for_device) {
         return mpAudioPolicy->get_stream_volume_index_for_device(mpAudioPolicy,
                                                                 stream,
                                                                 index,
                                                                 device);
-    } else {
+    } else 
+#endif
+    {
         return mpAudioPolicy->get_stream_volume_index(mpAudioPolicy, stream, index);
     }
 }
@@ -515,15 +521,19 @@ bool AudioPolicyService::isStreamActive(audio_stream_type_t stream, uint32_t inP
 
 bool AudioPolicyService::isStreamActiveRemotely(audio_stream_type_t stream, uint32_t inPastMs) const
 {
+#if !defined(ICS_AUDIO_BLOB) && !defined(MR1_AUDIO_BLOB)
     if (mpAudioPolicy == NULL) {
         return 0;
     }
     Mutex::Autolock _l(mLock);
     return mpAudioPolicy->is_stream_active_remotely(mpAudioPolicy, stream, inPastMs);
+#endif
+    return 0;
 }
 
 bool AudioPolicyService::isSourceActive(audio_source_t source) const
 {
+#ifndef ICS_AUDIO_BLOB
     if (mpAudioPolicy == NULL) {
         return false;
     }
@@ -532,6 +542,9 @@ bool AudioPolicyService::isSourceActive(audio_source_t source) const
     }
     Mutex::Autolock _l(mLock);
     return mpAudioPolicy->is_source_active(mpAudioPolicy, source);
+#else
+    return false;
+#endif
 }
 
 status_t AudioPolicyService::queryDefaultPreProcessing(int audioSession,
@@ -1020,10 +1033,12 @@ void AudioPolicyService::AudioCommandThread::insertCommand_l(AudioCommand *comma
             } else {
                 data2->mKeyValuePairs = param2.toString();
             }
-            command->mTime = command2->mTime;
-            // force delayMs to non 0 so that code below does not request to wait for
-            // command status as the command is now delayed
-            delayMs = 1;
+            if (!data2->mKeyValuePairs.compare(data->mKeyValuePairs)){
+                command->mTime = command2->mTime;
+                // force delayMs to non 0 so that code below does not request to wait for
+                // command status as the command is now delayed
+                delayMs = 1;
+            }
         } break;
 
         case SET_VOLUME: {
@@ -1137,6 +1152,9 @@ int AudioPolicyService::setVoiceVolume(float volume, int delayMs)
 
 bool AudioPolicyService::isOffloadSupported(const audio_offload_info_t& info)
 {
+#ifdef HAVE_PRE_KITKAT_AUDIO_BLOB
+    return false;
+#endif
     if (mpAudioPolicy == NULL) {
         ALOGV("mpAudioPolicy == NULL");
         return false;
