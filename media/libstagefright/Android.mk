@@ -71,8 +71,6 @@ LOCAL_C_INCLUDES:= \
         $(TOP)/external/tremolo \
         $(TOP)/external/openssl/include \
 
-LOCAL_CFLAGS += -fno-strict-aliasing
-
 ifneq ($(TI_CUSTOM_DOMX_PATH),)
 LOCAL_C_INCLUDES += $(TI_CUSTOM_DOMX_PATH)/omx_core/inc
 LOCAL_CPPFLAGS += -DUSE_TI_CUSTOM_DOMX
@@ -182,8 +180,6 @@ LOCAL_SHARED_LIBRARIES += \
         libdl
 
 LOCAL_CFLAGS += -Wno-multichar
-
-LOCAL_GCC := true
 
 ifeq ($(BOARD_USE_SAMSUNG_COLORFORMAT), true)
 LOCAL_CFLAGS += -DUSE_SAMSUNG_COLORFORMAT
