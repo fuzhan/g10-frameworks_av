@@ -406,10 +406,10 @@ void NuPlayer::Renderer::onDrainVideoQueue() {
     }
 
     int64_t realTimeUs;
+    int64_t mediaTimeUs;
     if (mFlags & FLAG_REAL_TIME) {
         CHECK(entry->mBuffer->meta()->findInt64("timeUs", &realTimeUs));
     } else {
-        int64_t mediaTimeUs;
         CHECK(entry->mBuffer->meta()->findInt64("timeUs", &mediaTimeUs));
 
         realTimeUs = mediaTimeUs - mAnchorTimeMediaUs + mAnchorTimeRealUs;
@@ -421,6 +421,8 @@ void NuPlayer::Renderer::onDrainVideoQueue() {
     if (tooLate) {
         ALOGV("video late by %lld us (%.2f secs)",
              mVideoLateByUs, mVideoLateByUs / 1E6);
+    } else if (mFlags & FLAG_REAL_TIME) {
+        ALOGV("rendering video at real time %.2f secs", realTimeUs / 1E6);
     } else {
         ALOGV("rendering video at media time %.2f secs", mediaTimeUs / 1E6);
         if (mSoftRenderer != NULL) {
