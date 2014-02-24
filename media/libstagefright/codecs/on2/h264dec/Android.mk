@@ -101,6 +101,9 @@ LOCAL_SHARED_LIBRARIES := \
 
 LOCAL_MODULE := libstagefright_soft_h264dec
 
+# Use GAS for now
+LOCAL_NO_INTEGRATED_AS_SUPPORT := true
+
 LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_SHARED_LIBRARY)
