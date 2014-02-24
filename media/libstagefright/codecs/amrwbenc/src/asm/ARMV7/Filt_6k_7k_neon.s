@@ -225,6 +225,6 @@ Filt_6k_7k_end:
 Lable1:
           .word   		fir_6k_7k-Lable1
           @ENDFUNC
-          .END
+          .end
 
 
