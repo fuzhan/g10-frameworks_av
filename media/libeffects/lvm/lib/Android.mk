@@ -168,6 +168,7 @@ LOCAL_SRC_FILES:= \
     Common/src/Core_MixSoft_1St_D32C31_WRA.c \
     Common/src/Core_MixInSoft_D32C31_SAT.c
 
+LOCAL_NO_POLLY_OPT_SUPPORT := true
 LOCAL_MODULE:= libreverb
 
 LOCAL_C_INCLUDES += \
